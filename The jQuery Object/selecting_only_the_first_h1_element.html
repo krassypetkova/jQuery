@@ -1,0 +1,21 @@
+<!--Selecting only the first <h1> element on the page (in a jQuery object)-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Selecting only the first h1 element</title>
+</head>
+<body>
+    <h1>heading 1</h1>
+    <h1>heading 2</h1>
+    <h1>heading 3</h1>
+    <h2>heading 4</h2>
+
+    <script src="./bower_components/jquery/dist/jquery.js"></script>
+    <script>
+        var headings = $( "h1" );
+
+        var firstHeading = headings.eq( 0 );
+    </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!--Viewing the number of <h1> tags on the page.-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Viewing the number of h1 tags</title>
+</head>
+<body>
+    <h1>heading 1</h1>
+    <h1>heading 2</h1>
+    <h1>heading 3</h1>
+    <h2>heading 4</h2>
+
+    <script src="./bower_components/jquery/dist/jquery.js"></script>
+    <script>
+            var headings = $( "h1" );
+
+            alert( headings.length );
+    </script>
+</body>
+</html>
