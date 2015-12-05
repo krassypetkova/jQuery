@@ -1,4 +1,8 @@
-<!--Selecting only the first <h1> element on the page (in a jQuery object)-->
+<!--Selecting only the first <h1> element on the page (in a jQuery object)
+
+If the goal is to select only the first heading element, another step is
+required.There are a number of ways to accomplish this, but the most
+straight-forward is the .eq() function.-->
 
 <!DOCTYPE html>
 <html>
@@ -11,7 +15,7 @@
     <h1>heading 3</h1>
     <h2>heading 4</h2>
 
-    <script src="./bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
     <script>
         var headings = $( "h1" );
 

@@ -1,4 +1,8 @@
-<!--Viewing the number of <h1> tags on the page.-->
+<!--Viewing the number of <h1> tags on the page.
+
+Headings is now a jQuery element containing all
+the <h1> tags already on the page. This can be
+verified by inspecting the .length property of headings:-->
 
 <!DOCTYPE html>
 <html>
@@ -11,11 +15,11 @@
     <h1>heading 3</h1>
     <h2>heading 4</h2>
 
-    <script src="./bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
     <script>
-            var headings = $( "h1" );
+        var headings = $( "h1" );
 
-            alert( headings.length );
+        alert( headings.length );
     </script>
 </body>
 </html>
