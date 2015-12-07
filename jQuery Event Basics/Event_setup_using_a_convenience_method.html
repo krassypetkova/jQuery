@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Setting Up Event Responses on DOM Elements</title>
+</head>
+<body>
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script>
+        // Event setup using a convenience method
+        $( "p" ).click(function() {
+            console.log( "You clicked a paragraph!" );
+        });
+
+        // Equivalent event setup using the `.on()` method
+        $( "p" ).on( "click", function() {
+            console.log( "click" );
+        });
+    </script>
+</body>
+</html>
