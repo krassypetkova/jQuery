@@ -1,0 +1,66 @@
+html, body {
+    font-family: Roboto;
+}
+
+#todos {
+    position: relative;
+    color: rgba(175, 47, 47, 0.15);
+    font-size: 100px;
+    text-align: center;
+}
+/***************************************/
+#input {
+    position: absolute;
+    left: 410px;
+    top: 130px;
+    padding-left: 60px;
+    width: 550px;
+    height: 70px;
+    font-size: 25px;
+
+    box-shadow:0px 0px 5px #A9A9A9;
+    -webkit-box-shadow: 0px 0px 20px #A9A9A9;
+    -webkit-padding: 3px;
+
+    border-width: 1px;
+    border-color: transparent;
+    border-style: inset;
+
+    outline: 0;
+}
+
+#input:focus {
+    box-shadow:0px 0px 5px #E89595;
+    -webkit-box-shadow: 0px 0px 20px #E89595;
+    -webkit-padding: 3px;
+
+    border-width: 1px;
+    border-color: transparent;
+    border-style: inset;
+
+    outline: 0;
+}
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    color: rgba(230,230,230,1.9);
+}
+input:-moz-placeholder, textarea:-moz-placeholder {
+    color: rgba(230,230,230,1.9);
+}
+
+/***************************************/
+.btn {
+    margin-left: 10px;
+    font-size: 14px;
+    color: #777777;
+    border: transparent;
+    background-color: transparent;
+}
+
+/*.btn:hover {
+      border: 1px solid;
+}*/
+
+.btn:focus {
+    border: 1px solid rgba(175, 47, 47, 0.15);
+}
