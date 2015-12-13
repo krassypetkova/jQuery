@@ -5,12 +5,54 @@
     <link rel="stylesheet" href="hover.css" type="text/css">
     <link rel="stylesheet" href="todos.css" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,300&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
-<h1 id="todos">todos</h1>
-<input id="input" placeholder="What needs to be done?">
-<button class="btn hvr-shadow" type="button">All</button>
-<button class="btn hvr-shadow" type="button">Active</button>
-<button class="btn hvr-shadow" type="button">Completed</button>
+    <section id="width-1000">
+        <h1 id="app-heading">todos</h1>
+        <section>
+            <!--<div id="input-div">-->
+            <form id="add-todo-form">
+                <input id="input" name="message" placeholder="What needs to be done?">
+            </form>
+            <!--</div>-->
+        </section>
+        <ul id="myList">
+        </ul>
+        <section id="footer">
+            <p id="items-left">4 items left</p>
+            <button class="btn hvr-glow" type="button">All</button>
+            <button class="btn hvr-glow" type="button">Active</button>
+            <button class="btn hvr-glow" type="button">Completed</button>
+            <button class="btn btn-4 hvr-glow" type="button">Clear completed</button>
+        </section>
+    </section>
+
+    <script>
+        $("#add-todo-form").submit(function (e) {
+            e.preventDefault();
+            var toAdd = $("input[name=message]").val(),
+                    deleteButton = $("<button class='btnRemove'>X</button>").click(removeTodo),
+                    li = $("<li>"+toAdd+"</li>").append(deleteButton);
+
+            $('ul').append(li);
+        });
+       /* $( "#pushBtn" ).click(function () {
+            var toAdd = $("input[name=message]").val(),
+                deleteButton = $("<button class='btnRemove'>X</button>").click(removeTodo),
+                li = $("<li>"+toAdd+"</li>").append(deleteButton);
+
+            $('ul').append(li);
+        });*/
+
+        /*$("#btnRemove").click(function() {
+            $("#myList li").val().remove();
+        });*/
+
+        function removeTodo(e) {
+            $(e.target.parentElement).remove();
+        }
+
+    </script>
 </body>
 </html>

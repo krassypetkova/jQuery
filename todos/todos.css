@@ -2,17 +2,24 @@ html, body {
     font-family: Roboto;
 }
 
-#todos {
+#width-1000 {
+    width: 700px;
+    margin: 0 auto;
+}
+
+#app-heading {
     position: relative;
-    color: rgba(175, 47, 47, 0.15);
+    /*color: rgba(175, 47, 47, 0.15);*/
+    color : rgba(248,177,72,0.8);
     font-size: 100px;
     text-align: center;
 }
 /***************************************/
 #input {
-    position: absolute;
+    /*position: absolute;
     left: 410px;
-    top: 130px;
+    top: 130px;*/
+    margin: 0 auto;
     padding-left: 60px;
     width: 550px;
     height: 70px;
@@ -30,8 +37,8 @@ html, body {
 }
 
 #input:focus {
-    box-shadow:0px 0px 5px #E89595;
-    -webkit-box-shadow: 0px 0px 20px #E89595;
+    box-shadow:0px 0px 5px #F8A639/*#E89595*/;
+    -webkit-box-shadow: 0px 0px 20px #F8A639/*#E89595*/;
     -webkit-padding: 3px;
 
     border-width: 1px;
@@ -49,18 +56,66 @@ input:-moz-placeholder, textarea:-moz-placeholder {
 }
 
 /***************************************/
+ul {
+    position: relative;
+    left: 362px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+li {
+    position: relative;
+    border: 1px solid rgba(249,198,103,0.4)/*#E6E6E6*/;
+    width: 490px;
+    height: 70px;
+    list-style-type: none;
+    font-size: 25px;
+    padding-left: 60px;
+}
+
+.btnRemove {
+    position: absolute;
+    right: 0px;
+    border: none;
+    color: #F8A639;
+    background-color: rgba(250,255,189,0.8);
+    font-size: 15px;
+    font-weight: bold;
+}
+/***************************************/
+#items-left {
+    position: absolute;
+    left: 7px;
+    margin-top: 25px;
+    display: inline;
+    font-size: 14px;
+    color: #777777;
+}
+
 .btn {
-    margin-left: 10px;
+    margin-top: 25px;
+    margin-left: 15px;
     font-size: 14px;
     color: #777777;
     border: transparent;
     background-color: transparent;
 }
 
-/*.btn:hover {
-      border: 1px solid;
+/*.hvr-glow:focus {
+    border-color: rgba(175, 47, 47, 0.15);
 }*/
 
-.btn:focus {
-    border: 1px solid rgba(175, 47, 47, 0.15);
+.btn-4 {
+    position: absolute;
+    right: 7px;
+}
+
+#footer {
+    position: relative;
+    left: 403px;
+    border: 2px solid /*rgba(249,198,103,0.4)*/#E6E6E6;
+    width: 550px;
+    height: 70px;
+    text-align: center;
+
 }
