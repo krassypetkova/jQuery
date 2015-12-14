@@ -8,24 +8,27 @@
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
-    <section id="width-1000">
+    <section id="wrapper">
         <h1 id="app-heading">todos</h1>
-        <section>
-            <!--<div id="input-div">-->
+        <div id="todo-wrapper">
             <form id="add-todo-form">
-                <input id="input" name="message" placeholder="What needs to be done?">
+                <input id="add-todo-input" name="message" placeholder="What needs to be done?">
             </form>
-            <!--</div>-->
-        </section>
-        <ul id="myList">
-        </ul>
-        <section id="footer">
-            <p id="items-left">4 items left</p>
-            <button class="btn hvr-glow" type="button">All</button>
-            <button class="btn hvr-glow" type="button">Active</button>
-            <button class="btn hvr-glow" type="button">Completed</button>
-            <button class="btn btn-4 hvr-glow" type="button">Clear completed</button>
-        </section>
+            <ul id="todo-list">
+                <li>aSDAs<button class="btnRemove">X</button></li>
+            </ul>
+            <footer>
+                <p id="items-left">4 items left</p>
+                <div id="buttons-wrapper">
+                    <input class="btn hvr-glow" type="button" value="All">
+                    <input class="btn hvr-glow" type="button" value="Active">
+                    <input class="btn hvr-glow" type="button" value="Completed">
+                </div>
+                <div id="items-right">
+                    <input class="btn btn-4 hvr-glow" type="button" value="Clear completed">
+                </div>
+            </footer>
+        </div>
     </section>
 
     <script>
