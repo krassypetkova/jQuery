@@ -39,7 +39,7 @@ textarea:focus, input:focus{
     font-size: 1.563rem;
     border: none;
 }
-
+/*////////////////////////////////////*/
 /*#input:focus {
     box-shadow:0px 0px 5px #F8A639/!*#E89595*!/;
     -webkit-box-shadow: 0px 0px 20px #F8A639/!*#E89595*!/;
@@ -62,18 +62,23 @@ input:-moz-placeholder, textarea:-moz-placeholder {
 /***************************************/
 #todo-list {
     margin-top: 0px;
-    margin-bottom: 10px;
-    padding: 0;
+    margin-bottom: 0px;
+    padding: 0px;
 }
 
 #todo-list > li {
     position: relative;
-    border: 1px solid rgba(249,198,103,0.4)/*#E6E6E6*/;
+    border: 1px solid #E6E6E6;
     height: 70px;
     line-height: 70px;
     list-style-type: none;
     font-size: 1.563rem;
     padding-left: 60px;
+}
+
+.done {
+    position: absolute;
+    left: 0px;
 }
 
 .btnRemove {
@@ -102,7 +107,8 @@ input:-moz-placeholder, textarea:-moz-placeholder {
 }
 
 footer {
-    border: 2px solid /*rgba(249,198,103,0.4)*/#E6E6E6;
+    /*border: 2px solid #E6E6E6;*/
+    /*border-top: none;*/
     height: 70px;
 }
 

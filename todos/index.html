@@ -12,10 +12,10 @@
         <h1 id="app-heading">todos</h1>
         <div id="todo-wrapper">
             <form id="add-todo-form">
+                <input id="checkbox-all" type="checkbox">
                 <input id="add-todo-input" name="message" placeholder="What needs to be done?">
             </form>
             <ul id="todo-list">
-                <li>aSDAs<button class="btnRemove">X</button></li>
             </ul>
             <footer>
                 <p id="items-left">4 items left</p>
@@ -34,13 +34,21 @@
     <script>
         $("#add-todo-form").submit(function (e) {
             e.preventDefault();
-            var toAdd = $("input[name=message]").val(),
+
+            var text = $("input[name=message]").val(),
+                    checkButton = $("<input type='checkbox' class='done'/>").click(finishTodo),
                     deleteButton = $("<button class='btnRemove'>X</button>").click(removeTodo),
-                    li = $("<li>"+toAdd+"</li>").append(deleteButton);
+                    li = $("<li>"+text+"</li>").append(checkButton, deleteButton);
 
             $('ul').append(li);
+            $("input[name=message ]").val(' ');
         });
-       /* $( "#pushBtn" ).click(function () {
+
+
+        $(function() {
+            $(document).on('click', '#checkbox-all', checkAllTodos);
+        });
+        /* $( "#pushBtn" ).click(function () {
             var toAdd = $("input[name=message]").val(),
                 deleteButton = $("<button class='btnRemove'>X</button>").click(removeTodo),
                 li = $("<li>"+toAdd+"</li>").append(deleteButton);
@@ -51,11 +59,31 @@
         /*$("#btnRemove").click(function() {
             $("#myList li").val().remove();
         });*/
+        function checkAllTodos() {
+           /* $("#tab1 #checkAll").click(function () {*/
+            if ($("#checkbox-all").is(':checked')) {
+                $("input[type=checkbox].done").each(function () {
+                    $(this).prop("checked", true);
+                });
+
+            } else {
+                $("input[type=checkbox].done").each(function () {
+                    $(this).prop("checked", false);
+                });
+            }
+        }
+
+        function finishTodo() {
+            if ( $(this).parent().css('textDecoration') == 'line-through') {
+                $(this).parent().css('textDecoration', 'none');
+            } else {
+                $(this).parent().css('textDecoration', 'line-through');
+            }
+        }
 
         function removeTodo(e) {
             $(e.target.parentElement).remove();
         }
-
     </script>
 </body>
 </html>
