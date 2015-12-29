@@ -127,3 +127,7 @@ footer > * {
     top: 27px;
 }
 
+.completed {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
