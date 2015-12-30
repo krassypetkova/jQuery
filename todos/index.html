@@ -34,7 +34,7 @@
 
             <div id="buttons-wrapper">
                 <input id="show-all" class="btn hvr-glow" type="button" value="All">
-                <input class="btn hvr-glow" type="button" value="Active">
+                <input class="btn hvr-glow show-active" type="button" value="Active">
                 <input class="btn hvr-glow show-completed" type="button" value="Completed">
             </div>
             <div id="items-right">
@@ -45,10 +45,13 @@
 </section>
 
 <script>
+    var $todoList = $("#todo-list");
+
     $("#add-todo-form").submit(addTodo);
     $("#checkbox-all").click(toggleAllTodos);
     $(".clear-completed").click(clearCompleted);
     $(".show-completed").click(filterCompleted);
+    $(".show-active").click(filterActive);
     $("#show-all").click(showAll);
     $("#todo-list input:checkbox").click(toggleTodo);
 
@@ -96,10 +99,22 @@
 
 
     function filterCompleted() {
-        var $todoList = $("#todo-list");
-
         $todoList.find("li.completed").show();
         $todoList.find("li:not(.completed)").hide();
+    }
+
+    //same function with itteration implementation
+/*    function filterCompleted() {
+        var $allTodos = $("#todo-list > li");
+
+        $allTodos.each(function (index, todoEl) {
+            $(todoEl).toggle($todo.hasClass('completed'));
+        });
+    }*/
+
+    function filterActive() {
+        $todoList.find("li.completed").hide();
+        $todoList.find("li:not(.completed)").show();
     }
 
     function showAll() {
