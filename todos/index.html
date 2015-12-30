@@ -53,16 +53,18 @@
     $(".show-completed").click(filterCompleted);
     $(".show-active").click(filterActive);
     $("#show-all").click(showAll);
+
     $("#todo-list input:checkbox").click(toggleTodo);
+    $("#todo-list button.btnRemove").click(removeTodo);
 
 
     function addTodo (e) {
         e.preventDefault();
 
         var text = $("input[name=message]").val(),
-                checkbox = $("<input type='checkbox' class='done'/>").click(toggleTodo),
-                deleteButton = $("<button class='btnRemove'>X</button>").click(removeTodo),
-                li = $("<li>" + text + "</li>").append(checkbox, deleteButton);
+            checkbox = $("<input type='checkbox' class='done'/>").click(toggleTodo),
+            deleteButton = $("<button class='btnRemove'>X</button>").click(removeTodo),
+            li = $("<li>" + text + "</li>").append(checkbox, deleteButton);
 
         $('ul').append(li);
         //$("input[name=message ]").val('');
