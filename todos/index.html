@@ -30,7 +30,7 @@
             <li>пазар<input type="checkbox" class="done"><button class="btnRemove">X</button></li>
         </ul>
         <footer>
-            <p id="items-left">4 items left</p>
+            <p id="counter-items"></p>
 
             <div id="buttons-wrapper">
                 <input id="show-all" class="btn hvr-glow" type="button" value="All">
@@ -55,6 +55,7 @@
     $("#show-all").click(showAll);
     $("#todo-list input:checkbox").click(toggleTodo);
 
+
     function addTodo (e) {
         e.preventDefault();
 
@@ -64,11 +65,15 @@
                 li = $("<li>" + text + "</li>").append(checkbox, deleteButton);
 
         $('ul').append(li);
-        $("input[name=message ]").val(' ');
+        //$("input[name=message ]").val('');
+        this.reset();
+        updateItemsCount();
     }
 
     // Toggle completed state of all todo list items
     function toggleAllTodos() {
+        // make varible for checked
+        // regarding to that variable toggle the class of list items
         $('input:checkbox').not(this).prop('checked', this.checked);
         if ($('li').css('textDecoration') == 'line-through') {
             $('li').css('textDecoration', 'none');
@@ -91,6 +96,7 @@
 
     function removeTodo(e) {
         $(e.target.parentElement).remove();
+        updateItemsCount();
     }
 
     function clearCompleted() {
@@ -122,6 +128,11 @@
     }
 
 
+    function updateItemsCount() {
+        var n = $("#todo-list li").length;
+        $("#counter-items").text(n + " items left");
+    }
+    updateItemsCount();
     /* $(function() {
      $(document).on('click', '.clear-completed', clearCompleted);
      });*/
