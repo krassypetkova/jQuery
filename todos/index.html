@@ -18,13 +18,13 @@
             <input id="add-todo-input" name="message" placeholder="What needs to be done?">
         </form>
         <ul id="todo-list">
-            <li class="completed"><input type="checkbox"><span>Пазар</span>
+            <li class="completed"><input type="checkbox" checked><span>Пазар</span>
                 <button class="btnRemove">X</button>
             </li>
             <li><input type="checkbox"><span>Чистене</span>
                 <button class="btnRemove">X</button>
             </li>
-            <li class="completed"><input type="checkbox"><span>Готвене</span>
+            <li class="completed"><input type="checkbox" checked><span>Готвене</span>
                 <button class="btnRemove">X</button>
             </li>
             <li><input type="checkbox"><span>Пране</span>
@@ -113,7 +113,7 @@
     }
 
     function clearCompleted() {
-        $("#todo-list .done:checkbox:checked").parent().remove();
+        $("#todo-list input[type='checkbox']:checkbox:checked").parent().remove();
         updateItemsCount();
     }
 
