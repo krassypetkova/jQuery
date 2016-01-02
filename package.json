@@ -1,0 +1,22 @@
+{
+  "name": "jquery_todo_app",
+  "version": "1.0.0",
+  "description": "Applications with jQuery",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krassypetkova/jQuery.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/krassypetkova/jQuery/issues"
+  },
+  "homepage": "https://github.com/krassypetkova/jQuery#readme"
+}
