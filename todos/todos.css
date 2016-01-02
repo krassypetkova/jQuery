@@ -31,11 +31,12 @@ textarea:focus, input:focus{
 
     outline: 0;
 }
+#add-todo-form {
+    margin: 0;
+}
 
 #add-todo-input {
-    width: 100%;
-    padding-left: 60px;
-    height: 70px;
+    padding: 30px 0;
     font-size: 1.563rem;
     border: none;
 }
@@ -73,15 +74,19 @@ input:-moz-placeholder, textarea:-moz-placeholder {
     line-height: 70px;
     list-style-type: none;
     font-size: 1.563rem;
-    padding-left: 60px;
 }
 
-.done {
-    position: absolute;
-    left: 0px;
+input[type='checkbox'] {
+    margin: 20px;
+}
+
+#todo-list li:hover .btnRemove {
+    display: initial;
 }
 
 .btnRemove {
+    display: none; /* it's visible on todo item hover */
+    cursor: pointer;
     position: absolute;
     right: 0px;
     border: none;
@@ -91,7 +96,7 @@ input:-moz-placeholder, textarea:-moz-placeholder {
     font-weight: bold;
 }
 /***************************************/
-#items-left {
+#counter-items {
     color: #777777;
     margin: 0;
 }
@@ -101,14 +106,16 @@ input:-moz-placeholder, textarea:-moz-placeholder {
 }
 
 .btn {
+    cursor: pointer;
     color: #777777;
     border: transparent;
     background-color: transparent;
 }
 
-footer {
+#todo-wrapper footer {
     /*border: 2px solid #E6E6E6;*/
     /*border-top: none;*/
+    padding: 0 10px;
     height: 70px;
 }
 

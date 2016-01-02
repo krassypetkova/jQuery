@@ -18,16 +18,18 @@
             <input id="add-todo-input" name="message" placeholder="What needs to be done?">
         </form>
         <ul id="todo-list">
-            <li class="completed">пране<input type="checkbox" checked class="done">
+            <li class="completed"><input type="checkbox"><span>Пазар</span>
                 <button class="btnRemove">X</button>
             </li>
-            <li> готвене<input type="checkbox" class="done">
+            <li><input type="checkbox"><span>Чистене</span>
                 <button class="btnRemove">X</button>
             </li>
-            <li class="completed"> чистене<input type="checkbox" checked class="done">
+            <li class="completed"><input type="checkbox"><span>Готвене</span>
                 <button class="btnRemove">X</button>
             </li>
-            <li>пазар<input type="checkbox" class="done"><button class="btnRemove">X</button></li>
+            <li><input type="checkbox"><span>Пране</span>
+                <button class="btnRemove">X</button>
+            </li>
         </ul>
         <footer>
             <p id="counter-items"></p>
@@ -58,13 +60,14 @@
     $("#todo-list button.btnRemove").click(removeTodo);
 
 
-    function addTodo (e) {
+    function addTodo(e) {
         e.preventDefault();
 
         var text = $("input[name=message]").val(),
-            checkbox = $("<input type='checkbox' class='done'/>").click(toggleTodo),
-            deleteButton = $("<button class='btnRemove'>X</button>").click(removeTodo),
-            li = $("<li>" + text + "</li>").append(checkbox, deleteButton);
+                checkbox = $("<input type='checkbox'/>").click(toggleTodo),
+                deleteButton = $("<button class='btnRemove'>X</button>").click(removeTodo),
+                textEl = $("<span>" + text + "</span>")
+        li = $("<li></li>").append(checkbox, textEl, deleteButton);
 
         $('ul').append(li);
         //$("input[name=message ]").val('');
@@ -77,23 +80,31 @@
         // make varible for checked
         // regarding to that variable toggle the class of list items
         $('input:checkbox').not(this).prop('checked', this.checked);
-        if ($('li').css('textDecoration') == 'line-through') {
-            $('li').css('textDecoration', 'none');
-            $('li').parent().css('opacity', '1');
+        if ($(this).is(":checked")) {
+            $('#todo-list > li').addClass("completed");
         } else {
-            $('li').css('textDecoration', 'line-through');
-            $('li').parent().css('opacity', '0.5');
+            $('#todo-list > li').removeClass("completed");
         }
+
+        /*if ($('li').css('textDecoration') == 'line-through') {
+         $('li').css('textDecoration', 'none');
+         $('li').parent().css('opacity', '1');
+         } else {
+         $('li').css('textDecoration', 'line-through');
+         $('li').parent().css('opacity', '0.5');
+         }*/
     }
 
     function toggleTodo() {
         $(this).parent().toggleClass('completed');
+        $("#checkbox-all").prop("checked", false);
+        updateItemsCount();
         /*
-        if (todoItem.hasClass('completed')) {
-            todoItem.removeClass('completed');
-        } else {
-            todoItem.addClass('completed');
-        }*/
+         if (todoItem.hasClass('completed')) {
+         todoItem.removeClass('completed');
+         } else {
+         todoItem.addClass('completed');
+         }*/
     }
 
     function removeTodo(e) {
@@ -103,6 +114,7 @@
 
     function clearCompleted() {
         $("#todo-list .done:checkbox:checked").parent().remove();
+        updateItemsCount();
     }
 
 
@@ -112,13 +124,13 @@
     }
 
     //same function with itteration implementation
-/*    function filterCompleted() {
-        var $allTodos = $("#todo-list > li");
+    /*    function filterCompleted() {
+     var $allTodos = $("#todo-list > li");
 
-        $allTodos.each(function (index, todoEl) {
-            $(todoEl).toggle($todo.hasClass('completed'));
-        });
-    }*/
+     $allTodos.each(function (index, todoEl) {
+     $(todoEl).toggle($todo.hasClass('completed'));
+     });
+     }*/
 
     function filterActive() {
         $todoList.find("li.completed").hide();
@@ -131,7 +143,7 @@
 
 
     function updateItemsCount() {
-        var n = $("#todo-list li").length;
+        var n = $("#todo-list li:not(.completed)").length;
         $("#counter-items").text(n + " items left");
     }
     updateItemsCount();
