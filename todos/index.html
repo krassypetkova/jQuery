@@ -18,18 +18,6 @@
             <input id="add-todo-input" name="message" placeholder="What needs to be done?">
         </form>
         <ul id="todo-list">
-            <li class="completed"><input type="checkbox" checked><span>Пазар</span>
-                <button class="btnRemove">X</button>
-            </li>
-            <li><input type="checkbox"><span>Чистене</span>
-                <button class="btnRemove">X</button>
-            </li>
-            <li class="completed"><input type="checkbox" checked><span>Готвене</span>
-                <button class="btnRemove">X</button>
-            </li>
-            <li><input type="checkbox"><span>Пране</span>
-                <button class="btnRemove">X</button>
-            </li>
         </ul>
         <footer>
             <p id="counter-items"></p>
@@ -47,9 +35,22 @@
 </section>
 
 <script>
+    function Todo(title, completed) {
+        this.title = title;
+        this.completed = completed;
+    }
+
+    $.get("/api/todo", function(data) {
+        renderAllTodos(data);
+        updateItemsCount();
+    });
+
+
+
     var $todoList = $("#todo-list");
 
-    $("#add-todo-form").submit(addTodo);
+    //$("#add-todo-form").submit(addTodo);
+    $("#add-todo-form").submit(postTodo);
     $("#checkbox-all").click(toggleAllTodos);
     $(".clear-completed").click(clearCompleted);
     $(".show-completed").click(filterCompleted);
@@ -58,6 +59,31 @@
 
     $("#todo-list input:checkbox").click(toggleTodo);
     $("#todo-list button.btnRemove").click(removeTodo);
+
+
+    function postTodo(e) {
+        e.preventDefault();
+        var text = $("input[name=message]").val()
+        var newTodo = new Todo(text, false);
+
+        $.post("/api/todo", newTodo,function(data) {
+            console.log(data);
+            addTodoFromObject(data);
+        });
+        this.reset();
+    }
+
+    function putTodo(e) {
+        $.ajax({
+            url: "/api/todo",
+            type: 'PUT',
+            success: function (data) {
+
+            },
+            data: {id: "THE ID OF THE TODO"}, // instead of string add todo id
+            contentType: type
+        })
+    }
 
 
     function addTodo(e) {
@@ -73,6 +99,24 @@
         //$("input[name=message ]").val('');
         this.reset();
         updateItemsCount();
+    };
+
+    function renderAllTodos(data) {
+        $.each(data, function (key, value) {
+            addTodoFromObject(value);
+        });
+    }
+
+
+    function addTodoFromObject(obj) {
+        var text = $("input[name=message]").val(),
+            checkbox = $("<input type='checkbox'/>").prop("checked", obj.completed).click(toggleTodo),
+            deleteButton = $("<button class='btnRemove'>X</button>").click(removeTodo),
+            textEl = $("<span>" + obj.title + "</span>");
+
+        li = $("<li></li>").append(checkbox, textEl, deleteButton).toggleClass("completed", obj.completed);
+
+        $('ul').append(li);
     }
 
     // Toggle completed state of all todo list items
@@ -85,6 +129,7 @@
         } else {
             $('#todo-list > li').removeClass("completed");
         }
+        updateItemsCount();
 
         /*if ($('li').css('textDecoration') == 'line-through') {
          $('li').css('textDecoration', 'none');
