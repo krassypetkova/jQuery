@@ -61,9 +61,15 @@
     $("#todo-list button.btnRemove").click(removeTodo);
 
 
+    function getTodo(id) {
+        $.get("/api/todo/" + id, function (data) {
+            console.log(data);
+        })
+    }
+
     function postTodo(e) {
         e.preventDefault();
-        var text = $("input[name=message]").val()
+        var text = $("input[name=message]").val();
         var newTodo = new Todo(text, false);
 
         $.post("/api/todo", newTodo,function(data) {
@@ -73,15 +79,33 @@
         this.reset();
     }
 
-    function putTodo(e) {
+    function putTodo(todoId) {
         $.ajax({
-            url: "/api/todo",
+            url: "/api/todo/" + todoId,
             type: 'PUT',
+            data: JSON.stringify({
+                id: 3,
+                title: "alaval",
+                completed: true
+            }),
+            contentType: "application/json",
             success: function (data) {
-
+                console.log(data);
+                console.log("successs PUT");
             },
-            data: {id: "THE ID OF THE TODO"}, // instead of string add todo id
-            contentType: type
+            error: function (data) {
+                console.log("error PUT");
+            }
+        })
+    }
+
+    function deleteTodo(todoId) {
+        $.ajax({
+            url: "/api/todo/" + todoId,
+            type: 'DELETE',
+            success: function (data) {
+                console.log("Todo was deleted");
+            }
         })
     }
 
@@ -192,6 +216,8 @@
         $("#counter-items").text(n + " items left");
     }
     updateItemsCount();
+
+
     /* $(function() {
      $(document).on('click', '.clear-completed', clearCompleted);
      });*/
