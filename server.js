@@ -54,6 +54,16 @@ app.post('/api/todo', function (req, res) {
    res.json(newTodo);
 });
 
+app.put('/api/todo/', function (req, res) {
+    var todosArr = req.body.todos;
+
+    todosArr.forEach(function (todo) {
+        todos[todo.id] = todo;
+    });
+
+    res.send(200);
+});
+
 app.put('/api/todo/:todo_id', function (req, res) {
     var reqTodoId = req.params.todo_id,
         todoId = req.body.id,
@@ -68,6 +78,16 @@ app.put('/api/todo/:todo_id', function (req, res) {
 app.delete('/api/todo/:todo_id', function (req, res) {
     var reqTodoId = req.params.todo_id;
     delete todos[reqTodoId];
+    res.send(200);
+});
+
+app.delete('/api/todo/', function (req, res) {
+    var todosArr = req.body.todos;
+
+    todosArr.forEach(function (id) {
+        delete todos[id];
+    });
+
     res.send(200);
 });
 

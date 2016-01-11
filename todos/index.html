@@ -51,15 +51,21 @@
 
     //$("#add-todo-form").submit(addTodo);
     $("#add-todo-form").submit(postTodo);
-    $("#checkbox-all").click(toggleAllTodos);
-    $(".clear-completed").click(clearCompleted);
+    $("#checkbox-all").click(putTodos);
+    $(".clear-completed").click(deleteTodos);
     $(".show-completed").click(filterCompleted);
     $(".show-active").click(filterActive);
     $("#show-all").click(showAll);
 
-    $("#todo-list input:checkbox").click(toggleTodo);
-    $("#todo-list button.btnRemove").click(removeTodo);
+    //$("#todo-list input:checkbox").click(toggleTodo);
+    //$("#todo-list input:checkbox").click(putTodo);
+    //$("#todo-list button.btnRemove").click(removeTodo);
 
+    function getTodos() {
+        $.get("/api/todo", function(data) {
+            console.table(data);
+        });
+    }
 
     function getTodo(id) {
         $.get("/api/todo/" + id, function (data) {
@@ -79,14 +85,20 @@
         this.reset();
     }
 
-    function putTodo(todoId) {
+    function putTodo(e) {
+        var checkbox = e.target;
+        var li = checkbox.parentElement;
+        var todoId = li.id;
+        var completed = checkbox.checked;
+        var title = $(li).find("span").text();
+
         $.ajax({
             url: "/api/todo/" + todoId,
             type: 'PUT',
             data: JSON.stringify({
-                id: 3,
-                title: "alaval",
-                completed: true
+                id: todoId,
+                title: title,
+                completed: completed
             }),
             contentType: "application/json",
             success: function (data) {
@@ -96,17 +108,74 @@
             error: function (data) {
                 console.log("error PUT");
             }
-        })
+        });
+        toggleTodo(e);
     }
 
-    function deleteTodo(todoId) {
+    function putTodos(e) {
+        toggleAllTodos(e);
+        var todosToRequest = [];
+        var allTodos = $("#todo-list > li");
+
+        allTodos.each(function (index, todoEl) {
+            var $todo = $(todoEl);
+
+            todosToRequest.push({
+                id: todoEl.id,
+                title: $todo.find("span").text(),
+                completed: $todo.find("input[type='checkbox']").is(':checked')
+            })
+        });
+
+        $.ajax({
+            url: "/api/todo/",
+            type: 'PUT',
+            data: {
+                todos: todosToRequest
+            },
+            success: function (data) {
+                console.log(data);
+                console.log("successs PUT");
+            },
+            error: function (data) {
+                console.log("error PUT");
+            }
+        });
+
+    }
+
+    function deleteTodo(e) {
+        var todoId = e.target.parentElement.id;
+
         $.ajax({
             url: "/api/todo/" + todoId,
             type: 'DELETE',
             success: function (data) {
                 console.log("Todo was deleted");
             }
-        })
+        });
+        removeTodo(e);
+    }
+
+    function deleteTodos() {
+        var completedTodosIds = [],
+            allComletedTodos = $("#todo-list input[type='checkbox']:checkbox:checked").parent()
+
+        allComletedTodos.each(function (index, todo) {
+            completedTodosIds.push(todo.id)
+        });
+
+        $.ajax({
+            url: "/api/todo/",
+            type: 'DELETE',
+            data: {
+                todos: completedTodosIds
+            },
+            success: function (data) {
+                console.log("Todo was deleted");
+            }
+        });
+        clearCompleted();
     }
 
 
@@ -134,21 +203,21 @@
 
     function addTodoFromObject(obj) {
         var text = $("input[name=message]").val(),
-            checkbox = $("<input type='checkbox'/>").prop("checked", obj.completed).click(toggleTodo),
-            deleteButton = $("<button class='btnRemove'>X</button>").click(removeTodo),
+            checkbox = $("<input type='checkbox'/>").prop("checked", obj.completed).click(putTodo),
+            deleteButton = $("<button class='btnRemove'>X</button>").click(deleteTodo),
             textEl = $("<span>" + obj.title + "</span>");
 
-        li = $("<li></li>").append(checkbox, textEl, deleteButton).toggleClass("completed", obj.completed);
+        li = $("<li></li>").attr("id", obj.id).append(checkbox, textEl, deleteButton).toggleClass("completed", obj.completed);
 
         $('ul').append(li);
     }
 
     // Toggle completed state of all todo list items
-    function toggleAllTodos() {
+    function toggleAllTodos(e) {
         // make varible for checked
         // regarding to that variable toggle the class of list items
-        $('input:checkbox').not(this).prop('checked', this.checked);
-        if ($(this).is(":checked")) {
+        $('#todo-list input:checkbox').prop('checked', e.target.checked);
+        if ($(e.target).is(":checked")) {
             $('#todo-list > li').addClass("completed");
         } else {
             $('#todo-list > li').removeClass("completed");
@@ -164,8 +233,8 @@
          }*/
     }
 
-    function toggleTodo() {
-        $(this).parent().toggleClass('completed');
+    function toggleTodo(e) {
+        $(e.target).parent().toggleClass('completed');
         $("#checkbox-all").prop("checked", false);
         updateItemsCount();
         /*
